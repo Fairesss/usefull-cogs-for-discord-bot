@@ -75,7 +75,8 @@ class Math(commands.Cog):
                          value=f"\"{option}\" not suported")
             await ctx.send(embed=em)
             return
-        em.add_field(name="result", value=f"sin {num} = {result}{option}")
+        em.add_field(name="result",
+                     value=f"sin {num} = {result}{option}")
         await ctx.send(embed=em)
 
     @commands.command()
@@ -94,8 +95,26 @@ class Math(commands.Cog):
                          value=f"\"{option}\" not suported")
             await ctx.send(embed=em)
             return
-        em.add_field(name="result", value=f"cos {num} = {result}{option}")
+        em.add_field(name="result",
+                     value=f"cos {num} = {result}{option}")
         await ctx.send(embed=em)
+
+    @commands.command()
+    async def tan(self, ctx, num: int, option: str = "deg"):
+        em = discord.Embed(title=f"tan {num} in {option}",
+                           colour=discord.Colour.green())
+        result = 0
+        if option == "deg":
+            num_ = num * math.pi / 180
+            result = math.sin(num_) / math.cos(num_)
+        elif option == "rad":
+            result = math.sin(num) / math.cos(num)
+        em.add_field(name="result",
+                     value=f"tan {num} = {result}")
+        await ctx.send(embed=em)
+
+
+
 
 
 
